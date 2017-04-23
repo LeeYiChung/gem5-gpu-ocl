@@ -1,0 +1,4 @@
+export CUDAHOME=/home/bachelor/b00902051/cuda-6.5
+export PATH=$CUDAHOME/bin:$PATH
+export PTX_SIM_USE_PTX_FILE=1
+export OPENCLORCUDA=OPENCL

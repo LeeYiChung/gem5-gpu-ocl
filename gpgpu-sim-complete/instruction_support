@@ -1,0 +1,29 @@
+inst. name | implementation | Note
+
+Main:
+
+addc         O
+atom         X                Need to support scope
+bar          X                Need to support .arrive, .red
+bfe          O
+bfi          O
+bfind        O
+brev         O
+copysign     O
+madc         O
+prmt         O
+red          X                Treat it as atom
+shf          O
+shfl         O
+subc         O
+testp        O
+
+Optional:
+
+brkpt        X
+pmevent      X
+prefetch     X
+prefetchu    X
+tld4         X
+trap         X
+txq          X
