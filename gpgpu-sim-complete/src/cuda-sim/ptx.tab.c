@@ -657,16 +657,16 @@ static const yytype_uint16 yyrline[] =
      451,   452,   453,   454,   455,   456,   457,   458,   459,   460,
      461,   462,   463,   464,   465,   466,   467,   468,   469,   470,
      471,   472,   473,   474,   475,   476,   477,   478,   479,   480,
-     481,   482,   483,   484,   489,   490,   491,   492,   493,   494,
-     496,   497,   498,   499,   500,   501,   502,   503,   504,   505,
-     508,   509,   511,   512,   513,   514,   517,   518,   519,   520,
-     523,   524,   525,   526,   527,   528,   529,   530,   531,   532,
-     533,   534,   535,   536,   537,   538,   539,   540,   543,   544,
-     546,   547,   548,   549,   550,   551,   552,   553,   554,   555,
-     556,   557,   558,   559,   560,   561,   562,   563,   564,   565,
-     568,   569,   570,   571,   574,   574,   579,   580,   583,   584,
-     585,   586,   587,   590,   591,   592,   593,   594,   595,   596,
-     599,   600,   601,   604,   605,   606,   607,   608
+     481,   482,   483,   484,   487,   488,   489,   490,   491,   492,
+     494,   495,   496,   497,   498,   499,   500,   501,   502,   503,
+     506,   507,   509,   510,   511,   512,   515,   516,   517,   518,
+     521,   522,   523,   524,   525,   526,   527,   528,   529,   530,
+     531,   532,   533,   534,   535,   536,   537,   538,   541,   542,
+     544,   545,   546,   547,   548,   549,   550,   551,   552,   553,
+     554,   555,   556,   557,   558,   559,   560,   561,   562,   563,
+     566,   567,   568,   569,   572,   572,   577,   578,   581,   582,
+     583,   584,   585,   588,   589,   590,   591,   592,   593,   594,
+     597,   598,   599,   602,   603,   604,   605,   606
 };
 #endif
 
@@ -2766,505 +2766,505 @@ yyreduce:
     break;
 
   case 204:
-#line 489 "ptx.y" /* yacc.c:1646  */
+#line 487 "ptx.y" /* yacc.c:1646  */
     { add_option(TESTP_FINITE); }
 #line 2772 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 205:
-#line 490 "ptx.y" /* yacc.c:1646  */
+#line 488 "ptx.y" /* yacc.c:1646  */
     { add_option(TESTP_INFINITE); }
 #line 2778 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 206:
-#line 491 "ptx.y" /* yacc.c:1646  */
+#line 489 "ptx.y" /* yacc.c:1646  */
     { add_option(TESTP_NUMBER); }
 #line 2784 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 207:
-#line 492 "ptx.y" /* yacc.c:1646  */
+#line 490 "ptx.y" /* yacc.c:1646  */
     { add_option(TESTP_NOTANUMBER); }
 #line 2790 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 208:
-#line 493 "ptx.y" /* yacc.c:1646  */
+#line 491 "ptx.y" /* yacc.c:1646  */
     { add_option(TESTP_NORMAL); }
 #line 2796 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 209:
-#line 494 "ptx.y" /* yacc.c:1646  */
+#line 492 "ptx.y" /* yacc.c:1646  */
     { add_option(TESTP_SUBNORMAL); }
 #line 2802 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 210:
-#line 496 "ptx.y" /* yacc.c:1646  */
+#line 494 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_AND); }
 #line 2808 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 211:
-#line 497 "ptx.y" /* yacc.c:1646  */
+#line 495 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_OR); }
 #line 2814 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 212:
-#line 498 "ptx.y" /* yacc.c:1646  */
+#line 496 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_XOR); }
 #line 2820 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 213:
-#line 499 "ptx.y" /* yacc.c:1646  */
+#line 497 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_CAS); }
 #line 2826 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 214:
-#line 500 "ptx.y" /* yacc.c:1646  */
+#line 498 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_EXCH); }
 #line 2832 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 215:
-#line 501 "ptx.y" /* yacc.c:1646  */
+#line 499 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_ADD); }
 #line 2838 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 216:
-#line 502 "ptx.y" /* yacc.c:1646  */
+#line 500 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_INC); }
 #line 2844 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 217:
-#line 503 "ptx.y" /* yacc.c:1646  */
+#line 501 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_DEC); }
 #line 2850 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 218:
-#line 504 "ptx.y" /* yacc.c:1646  */
+#line 502 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_MIN); }
 #line 2856 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 219:
-#line 505 "ptx.y" /* yacc.c:1646  */
+#line 503 "ptx.y" /* yacc.c:1646  */
     { add_option(ATOMIC_MAX); }
 #line 2862 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 222:
-#line 511 "ptx.y" /* yacc.c:1646  */
+#line 509 "ptx.y" /* yacc.c:1646  */
     { add_option(RN_OPTION); }
 #line 2868 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 223:
-#line 512 "ptx.y" /* yacc.c:1646  */
+#line 510 "ptx.y" /* yacc.c:1646  */
     { add_option(RZ_OPTION); }
 #line 2874 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 224:
-#line 513 "ptx.y" /* yacc.c:1646  */
+#line 511 "ptx.y" /* yacc.c:1646  */
     { add_option(RM_OPTION); }
 #line 2880 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 225:
-#line 514 "ptx.y" /* yacc.c:1646  */
+#line 512 "ptx.y" /* yacc.c:1646  */
     { add_option(RP_OPTION); }
 #line 2886 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 226:
-#line 517 "ptx.y" /* yacc.c:1646  */
+#line 515 "ptx.y" /* yacc.c:1646  */
     { add_option(RNI_OPTION); }
 #line 2892 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 227:
-#line 518 "ptx.y" /* yacc.c:1646  */
+#line 516 "ptx.y" /* yacc.c:1646  */
     { add_option(RZI_OPTION); }
 #line 2898 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 228:
-#line 519 "ptx.y" /* yacc.c:1646  */
+#line 517 "ptx.y" /* yacc.c:1646  */
     { add_option(RMI_OPTION); }
 #line 2904 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 229:
-#line 520 "ptx.y" /* yacc.c:1646  */
+#line 518 "ptx.y" /* yacc.c:1646  */
     { add_option(RPI_OPTION); }
 #line 2910 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 230:
-#line 523 "ptx.y" /* yacc.c:1646  */
+#line 521 "ptx.y" /* yacc.c:1646  */
     { add_option(EQ_OPTION); }
 #line 2916 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 231:
-#line 524 "ptx.y" /* yacc.c:1646  */
+#line 522 "ptx.y" /* yacc.c:1646  */
     { add_option(NE_OPTION); }
 #line 2922 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 232:
-#line 525 "ptx.y" /* yacc.c:1646  */
+#line 523 "ptx.y" /* yacc.c:1646  */
     { add_option(LT_OPTION); }
 #line 2928 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 233:
-#line 526 "ptx.y" /* yacc.c:1646  */
+#line 524 "ptx.y" /* yacc.c:1646  */
     { add_option(LE_OPTION); }
 #line 2934 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 234:
-#line 527 "ptx.y" /* yacc.c:1646  */
+#line 525 "ptx.y" /* yacc.c:1646  */
     { add_option(GT_OPTION); }
 #line 2940 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 235:
-#line 528 "ptx.y" /* yacc.c:1646  */
+#line 526 "ptx.y" /* yacc.c:1646  */
     { add_option(GE_OPTION); }
 #line 2946 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 236:
-#line 529 "ptx.y" /* yacc.c:1646  */
+#line 527 "ptx.y" /* yacc.c:1646  */
     { add_option(LO_OPTION); }
 #line 2952 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 237:
-#line 530 "ptx.y" /* yacc.c:1646  */
+#line 528 "ptx.y" /* yacc.c:1646  */
     { add_option(LS_OPTION); }
 #line 2958 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 238:
-#line 531 "ptx.y" /* yacc.c:1646  */
+#line 529 "ptx.y" /* yacc.c:1646  */
     { add_option(HI_OPTION); }
 #line 2964 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 239:
-#line 532 "ptx.y" /* yacc.c:1646  */
+#line 530 "ptx.y" /* yacc.c:1646  */
     { add_option(HS_OPTION); }
 #line 2970 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 240:
-#line 533 "ptx.y" /* yacc.c:1646  */
+#line 531 "ptx.y" /* yacc.c:1646  */
     { add_option(EQU_OPTION); }
 #line 2976 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 241:
-#line 534 "ptx.y" /* yacc.c:1646  */
+#line 532 "ptx.y" /* yacc.c:1646  */
     { add_option(NEU_OPTION); }
 #line 2982 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 242:
-#line 535 "ptx.y" /* yacc.c:1646  */
+#line 533 "ptx.y" /* yacc.c:1646  */
     { add_option(LTU_OPTION); }
 #line 2988 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 243:
-#line 536 "ptx.y" /* yacc.c:1646  */
+#line 534 "ptx.y" /* yacc.c:1646  */
     { add_option(LEU_OPTION); }
 #line 2994 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 244:
-#line 537 "ptx.y" /* yacc.c:1646  */
+#line 535 "ptx.y" /* yacc.c:1646  */
     { add_option(GTU_OPTION); }
 #line 3000 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 245:
-#line 538 "ptx.y" /* yacc.c:1646  */
+#line 536 "ptx.y" /* yacc.c:1646  */
     { add_option(GEU_OPTION); }
 #line 3006 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 246:
-#line 539 "ptx.y" /* yacc.c:1646  */
+#line 537 "ptx.y" /* yacc.c:1646  */
     { add_option(NUM_OPTION); }
 #line 3012 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 247:
-#line 540 "ptx.y" /* yacc.c:1646  */
+#line 538 "ptx.y" /* yacc.c:1646  */
     { add_option(NAN_OPTION); }
 #line 3018 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 250:
-#line 546 "ptx.y" /* yacc.c:1646  */
+#line 544 "ptx.y" /* yacc.c:1646  */
     { add_scalar_operand( (yyvsp[0].string_value) ); }
 #line 3024 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 251:
-#line 547 "ptx.y" /* yacc.c:1646  */
+#line 545 "ptx.y" /* yacc.c:1646  */
     { add_neg_pred_operand( (yyvsp[0].string_value) ); }
 #line 3030 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 252:
-#line 548 "ptx.y" /* yacc.c:1646  */
+#line 546 "ptx.y" /* yacc.c:1646  */
     { add_scalar_operand( (yyvsp[0].string_value) ); change_operand_neg(); }
 #line 3036 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 257:
-#line 553 "ptx.y" /* yacc.c:1646  */
+#line 551 "ptx.y" /* yacc.c:1646  */
     { change_operand_neg(); }
 #line 3042 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 259:
-#line 555 "ptx.y" /* yacc.c:1646  */
+#line 553 "ptx.y" /* yacc.c:1646  */
     { add_address_operand((yyvsp[-2].string_value),(yyvsp[0].int_value)); }
 #line 3048 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 260:
-#line 556 "ptx.y" /* yacc.c:1646  */
+#line 554 "ptx.y" /* yacc.c:1646  */
     { add_scalar_operand( (yyvsp[-1].string_value) ); change_operand_lohi(1);}
 #line 3054 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 261:
-#line 557 "ptx.y" /* yacc.c:1646  */
+#line 555 "ptx.y" /* yacc.c:1646  */
     { add_scalar_operand( (yyvsp[-1].string_value) ); change_operand_lohi(1); change_operand_neg();}
 #line 3060 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 262:
-#line 558 "ptx.y" /* yacc.c:1646  */
+#line 556 "ptx.y" /* yacc.c:1646  */
     { add_scalar_operand( (yyvsp[-1].string_value) ); change_operand_lohi(2);}
 #line 3066 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 263:
-#line 559 "ptx.y" /* yacc.c:1646  */
+#line 557 "ptx.y" /* yacc.c:1646  */
     { add_scalar_operand( (yyvsp[-1].string_value) ); change_operand_lohi(2); change_operand_neg();}
 #line 3072 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 264:
-#line 560 "ptx.y" /* yacc.c:1646  */
+#line 558 "ptx.y" /* yacc.c:1646  */
     { add_2vector_operand((yyvsp[-2].string_value),(yyvsp[0].string_value)); change_double_operand_type(-1);}
 #line 3078 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 265:
-#line 561 "ptx.y" /* yacc.c:1646  */
+#line 559 "ptx.y" /* yacc.c:1646  */
     { add_2vector_operand((yyvsp[-3].string_value),(yyvsp[-1].string_value)); change_double_operand_type(-1); change_operand_lohi(1);}
 #line 3084 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 266:
-#line 562 "ptx.y" /* yacc.c:1646  */
+#line 560 "ptx.y" /* yacc.c:1646  */
     { add_2vector_operand((yyvsp[-3].string_value),(yyvsp[-1].string_value)); change_double_operand_type(-1); change_operand_lohi(2);}
 #line 3090 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 267:
-#line 563 "ptx.y" /* yacc.c:1646  */
+#line 561 "ptx.y" /* yacc.c:1646  */
     { add_2vector_operand((yyvsp[-2].string_value),(yyvsp[0].string_value)); change_double_operand_type(-3);}
 #line 3096 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 268:
-#line 564 "ptx.y" /* yacc.c:1646  */
+#line 562 "ptx.y" /* yacc.c:1646  */
     { add_2vector_operand((yyvsp[-3].string_value),(yyvsp[-1].string_value)); change_double_operand_type(-3); change_operand_lohi(1);}
 #line 3102 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 269:
-#line 565 "ptx.y" /* yacc.c:1646  */
+#line 563 "ptx.y" /* yacc.c:1646  */
     { add_2vector_operand((yyvsp[-3].string_value),(yyvsp[-1].string_value)); change_double_operand_type(-3); change_operand_lohi(2);}
 #line 3108 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 270:
-#line 568 "ptx.y" /* yacc.c:1646  */
+#line 566 "ptx.y" /* yacc.c:1646  */
     { add_2vector_operand((yyvsp[-3].string_value),(yyvsp[-1].string_value)); }
 #line 3114 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 271:
-#line 569 "ptx.y" /* yacc.c:1646  */
+#line 567 "ptx.y" /* yacc.c:1646  */
     { add_3vector_operand((yyvsp[-5].string_value),(yyvsp[-3].string_value),(yyvsp[-1].string_value)); }
 #line 3120 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 272:
-#line 570 "ptx.y" /* yacc.c:1646  */
+#line 568 "ptx.y" /* yacc.c:1646  */
     { add_4vector_operand((yyvsp[-7].string_value),(yyvsp[-5].string_value),(yyvsp[-3].string_value),(yyvsp[-1].string_value)); }
 #line 3126 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 273:
-#line 571 "ptx.y" /* yacc.c:1646  */
+#line 569 "ptx.y" /* yacc.c:1646  */
     { add_1vector_operand((yyvsp[-1].string_value)); }
 #line 3132 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 274:
-#line 574 "ptx.y" /* yacc.c:1646  */
+#line 572 "ptx.y" /* yacc.c:1646  */
     { add_scalar_operand((yyvsp[-1].string_value)); }
 #line 3138 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 276:
-#line 579 "ptx.y" /* yacc.c:1646  */
+#line 577 "ptx.y" /* yacc.c:1646  */
     { add_builtin_operand((yyvsp[-1].int_value),(yyvsp[0].int_value)); }
 #line 3144 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 277:
-#line 580 "ptx.y" /* yacc.c:1646  */
+#line 578 "ptx.y" /* yacc.c:1646  */
     { add_builtin_operand((yyvsp[0].int_value),-1); }
 #line 3150 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 278:
-#line 583 "ptx.y" /* yacc.c:1646  */
+#line 581 "ptx.y" /* yacc.c:1646  */
     { add_memory_operand(); }
 #line 3156 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 279:
-#line 584 "ptx.y" /* yacc.c:1646  */
+#line 582 "ptx.y" /* yacc.c:1646  */
     { add_memory_operand(); change_memory_addr_space((yyvsp[-3].string_value)); }
 #line 3162 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 280:
-#line 585 "ptx.y" /* yacc.c:1646  */
+#line 583 "ptx.y" /* yacc.c:1646  */
     { change_memory_addr_space((yyvsp[-3].string_value)); }
 #line 3168 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 281:
-#line 586 "ptx.y" /* yacc.c:1646  */
+#line 584 "ptx.y" /* yacc.c:1646  */
     { change_memory_addr_space((yyvsp[-3].string_value)); add_memory_operand();}
 #line 3174 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 282:
-#line 587 "ptx.y" /* yacc.c:1646  */
+#line 585 "ptx.y" /* yacc.c:1646  */
     { change_operand_neg(); }
 #line 3180 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 283:
-#line 590 "ptx.y" /* yacc.c:1646  */
+#line 588 "ptx.y" /* yacc.c:1646  */
     { add_double_operand((yyvsp[-2].string_value),(yyvsp[0].string_value)); change_double_operand_type(1); }
 #line 3186 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 284:
-#line 591 "ptx.y" /* yacc.c:1646  */
+#line 589 "ptx.y" /* yacc.c:1646  */
     { add_double_operand((yyvsp[-3].string_value),(yyvsp[-1].string_value)); change_double_operand_type(1); change_operand_lohi(1); }
 #line 3192 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 285:
-#line 592 "ptx.y" /* yacc.c:1646  */
+#line 590 "ptx.y" /* yacc.c:1646  */
     { add_double_operand((yyvsp[-3].string_value),(yyvsp[-1].string_value)); change_double_operand_type(1); change_operand_lohi(2); }
 #line 3198 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 286:
-#line 593 "ptx.y" /* yacc.c:1646  */
+#line 591 "ptx.y" /* yacc.c:1646  */
     { add_double_operand((yyvsp[-3].string_value),(yyvsp[0].string_value)); change_double_operand_type(2); }
 #line 3204 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 287:
-#line 594 "ptx.y" /* yacc.c:1646  */
+#line 592 "ptx.y" /* yacc.c:1646  */
     { add_double_operand((yyvsp[-4].string_value),(yyvsp[-1].string_value)); change_double_operand_type(2); change_operand_lohi(1); }
 #line 3210 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 288:
-#line 595 "ptx.y" /* yacc.c:1646  */
+#line 593 "ptx.y" /* yacc.c:1646  */
     { add_double_operand((yyvsp[-4].string_value),(yyvsp[-1].string_value)); change_double_operand_type(2); change_operand_lohi(2); }
 #line 3216 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 289:
-#line 596 "ptx.y" /* yacc.c:1646  */
+#line 594 "ptx.y" /* yacc.c:1646  */
     { add_address_operand((yyvsp[-3].string_value),(yyvsp[0].int_value)); change_double_operand_type(3); }
 #line 3222 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 290:
-#line 599 "ptx.y" /* yacc.c:1646  */
+#line 597 "ptx.y" /* yacc.c:1646  */
     { add_literal_int((yyvsp[0].int_value)); }
 #line 3228 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 291:
-#line 600 "ptx.y" /* yacc.c:1646  */
+#line 598 "ptx.y" /* yacc.c:1646  */
     { add_literal_float((yyvsp[0].float_value)); }
 #line 3234 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 292:
-#line 601 "ptx.y" /* yacc.c:1646  */
+#line 599 "ptx.y" /* yacc.c:1646  */
     { add_literal_double((yyvsp[0].double_value)); }
 #line 3240 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 293:
-#line 604 "ptx.y" /* yacc.c:1646  */
+#line 602 "ptx.y" /* yacc.c:1646  */
     { add_address_operand((yyvsp[0].string_value),0); }
 #line 3246 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 294:
-#line 605 "ptx.y" /* yacc.c:1646  */
+#line 603 "ptx.y" /* yacc.c:1646  */
     { add_address_operand((yyvsp[-1].string_value),0); change_operand_lohi(1);}
 #line 3252 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 295:
-#line 606 "ptx.y" /* yacc.c:1646  */
+#line 604 "ptx.y" /* yacc.c:1646  */
     { add_address_operand((yyvsp[-1].string_value),0); change_operand_lohi(2); }
 #line 3258 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 296:
-#line 607 "ptx.y" /* yacc.c:1646  */
+#line 605 "ptx.y" /* yacc.c:1646  */
     { add_address_operand((yyvsp[-2].string_value),(yyvsp[0].int_value)); }
 #line 3264 "ptx.tab.c" /* yacc.c:1646  */
     break;
 
   case 297:
-#line 608 "ptx.y" /* yacc.c:1646  */
+#line 606 "ptx.y" /* yacc.c:1646  */
     { add_address_operand2((yyvsp[0].int_value)); }
 #line 3270 "ptx.tab.c" /* yacc.c:1646  */
     break;
@@ -3498,7 +3498,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 611 "ptx.y" /* yacc.c:1906  */
+#line 609 "ptx.y" /* yacc.c:1906  */
 
 
 extern int ptx_lineno;
