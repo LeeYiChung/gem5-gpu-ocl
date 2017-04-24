@@ -1,4 +1,11 @@
+export GEM5GPU_OCL=/home/bachelor/b00902051/gem5-gpu-ocl
 export CUDAHOME=/home/bachelor/b00902051/cuda-6.5
 export PATH=$CUDAHOME/bin:$PATH
 export PTX_SIM_USE_PTX_FILE=1
-export OPENCLORCUDA=OPENCL
+export GEM5GPU_CUDA_OR_OPENCL=OPENCL
+
+export OPENCL=$GEM5GPU_OCL/benchmarks/libopencl
+export OPENCV=/home/bachelor/b00902051/libopencv
+export AMDAPP=/home/bachelor/b00902051/AMD-APP-SDK-v3.0
+export M5THREAD=$GEM5GPU_OCL/gem5/m5threads
+export PKG_CONFIG_PATH=$OPENCV/lib/pkgconfig

@@ -567,6 +567,21 @@ kernel_info_t::kernel_info_t( dim3 gridDim, dim3 blockDim, class function_info *
 	// Initial for parent kernel
 	m_parent_kernel = NULL;
 	m_use_last_cta = false;
+    
+    /* Lalala */
+    m_num_ctas_issued = 0;
+    char *signal_block_ready_kernel = getenv("GEM5GPU_SIGNAL_BLOCK_READY");
+    /* orignal mode */
+    if(signal_block_ready_kernel == NULL) {
+        dim3 ctaid;
+        for(ctaid.z = 0; ctaid.z < gridDim.z; ctaid.z++) {
+            for(ctaid.y = 0; ctaid.y < gridDim.y; ctaid.y++) {
+                for(ctaid.x = 0; ctaid.x < gridDim.x; ctaid.x++) {
+                    m_ready_ctas.push_back(ctaid);
+                }
+            }
+        }
+    }
 }
 
 // Handle for CTA padding in OpenCL 2.0

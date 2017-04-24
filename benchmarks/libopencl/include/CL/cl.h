@@ -1227,6 +1227,9 @@ clEnqueueNDRangeKernel(cl_command_queue /* command_queue */,
                        cl_event *       /* event */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
+clSignalBlockReady(const size_t* blockIdx) CL_API_SUFFIX__VERSION_1_0;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueNativeKernel(cl_command_queue  /* command_queue */,
 					  void (CL_CALLBACK * /*user_func*/)(void *), 
                       void *            /* args */,

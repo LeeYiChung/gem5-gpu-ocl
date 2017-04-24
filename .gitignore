@@ -1,11 +1,14 @@
 benchmark/*
-
+working/*
+CLBench/*
+**/*.swp
 gem5/full_system_images/*
 gem5/build/*
 gem5/m5out/*
 gem5/a.out
 
 gem5/**/*.pyc
+gem5-gpu/**/*.pyc
 
 gpgpu-sim-complete/libcuda/cuobjdump_lexer.c
 gpgpu-sim-complete/libcuda/cuobjdump_parser.c
@@ -30,5 +33,8 @@ gpgpu-sim-complete/cuobjdump_to_ptxplus/sass_parser.hh
 gpgpu-sim-complete/cuobjdump_to_ptxplus/sass_parser.output
 gpgpu-sim-complete/build/*
 gpgpu-sim-complete/src/cuda-sim/ptx.output
+
+benchmarks/libopencl/*.o
+benchmarks/libopencl/*.a
 
 *~

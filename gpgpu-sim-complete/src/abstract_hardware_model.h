@@ -212,23 +212,51 @@ public:
 	dim3 get_cta_dim() const { return m_block_dim; }
 
 	void increment_cta_id() 
-	{ 
-		increment_x_then_y_then_z(m_next_cta,m_grid_dim); 
-		m_next_tid.x=0;
+	{
+        /* Lalala */
+		//increment_x_then_y_then_z(m_next_cta,m_grid_dim); 
+        dim3 ctaid3d = m_ready_ctas.front();
+        printf("GPGPU-Sim PTX simulator:  allocating thread ctaid=(%u,%u,%u)\n", ctaid3d.x,ctaid3d.y,ctaid3d.z);
+        fflush(stdout);
+		
+        m_ready_ctas.pop_front();
+        m_num_ctas_issued++;
+        m_next_tid.x=0;
 		m_next_tid.y=0;
 		m_next_tid.z=0;
-		if (m_use_last_cta)
+		/*if (m_use_last_cta)
 		{
 			m_real_block_dim.x = (m_next_cta.x == (m_grid_dim.x - 1)) ? m_last_block_dim.x : m_block_dim.x;
 			m_real_block_dim.y = (m_next_cta.y == (m_grid_dim.y - 1)) ? m_last_block_dim.y : m_block_dim.y;
 			m_real_block_dim.z = (m_next_cta.z == (m_grid_dim.z - 1)) ? m_last_block_dim.z : m_block_dim.z;
-		}
+		}*/
 	}
-	dim3 get_next_cta_id() const { return m_next_cta; }
+	dim3 get_next_cta_id() const 
+    {
+        /* Lalala */
+        return m_ready_ctas.front();
+        //return m_next_cta; 
+    }
 	bool no_more_ctas_to_run() const 
 	{
-		return (m_next_cta.x >= m_grid_dim.x || m_next_cta.y >= m_grid_dim.y || m_next_cta.z >= m_grid_dim.z );
+        /* Lalala */
+        return m_num_ctas_issued == num_blocks();
+		//return (m_next_cta.x >= m_grid_dim.x || m_next_cta.y >= m_grid_dim.y || m_next_cta.z >= m_grid_dim.z );
 	}
+
+    /* Lalala */
+    bool no_ready_ctas_to_run() const
+    {
+        return m_ready_ctas.empty();
+    }
+    
+    /* Lalala */
+    void signal_cta_ready(dim3 ctaid)
+    {
+        printf("GPGPU-Sim PTX simulator:  signal ready thread ctaid=(%u,%u,%u)\n", ctaid.x,ctaid.y,ctaid.z);
+        fflush(stdout);
+        m_ready_ctas.push_back(ctaid);
+    }
 
 	void increment_thread_id()
 	{
@@ -288,6 +316,10 @@ private:
 
 	// TODO: What is this?
 	address_type m_inst_text_base_vaddr;
+
+    /* Lalala */
+    std::list<dim3> m_ready_ctas;
+    unsigned m_num_ctas_issued;
 
 public:
 	address_type get_inst_base_vaddr() { return m_inst_text_base_vaddr; };

@@ -1460,6 +1460,40 @@ clEnqueueNDRangeKernel(cl_command_queue command_queue,
     return ret;
 }
 
+
+/* Lalala */
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSignalBlockReady(const size_t* blockIdx) CL_API_SUFFIX__VERSION_1_0
+{
+    fprintf(stdout, "OPENCL RT API: clSignalBlockReady(%d, %d, %d)\n", blockIdx[0], blockIdx[1], blockIdx[2]);
+    fflush(stdout);
+    
+    gpusyscall_t call_params;
+    call_params.num_args = 1;
+    call_params.arg_lengths = new int[call_params.num_args];
+    
+    call_params.arg_lengths[0] = sizeof(const size_t*);
+    call_params.total_bytes = call_params.arg_lengths[0];
+    call_params.args = new char[call_params.total_bytes];
+    
+    call_params.ret = new char[sizeof(cl_int)];
+    bool* ret_spot = (bool*)call_params.ret;
+    *ret_spot = CL_SUCCESS;
+
+    int bytes_off = 0;
+    int lengths_off = 0;
+    pack(call_params.args, bytes_off, call_params.arg_lengths, lengths_off, (char *)&blockIdx, call_params.arg_lengths[0]);
+    
+    m5_gpu(116, (uint64_t)&call_params);
+    cl_int ret = *((cl_int*)call_params.ret);
+
+    delete call_params.args;
+    delete call_params.arg_lengths;
+    delete call_params.ret;
+
+    return ret;
+}
+
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueReadBuffer(cl_command_queue    command_queue,
                     cl_mem              buffer,

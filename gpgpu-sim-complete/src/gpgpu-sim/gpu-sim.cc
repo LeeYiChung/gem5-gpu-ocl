@@ -1347,6 +1347,17 @@ gpgpu_sim::l2_cycle()
     }
 }
 
+/* Lalala */
+// TODO: support kernel id
+bool 
+gpgpu_sim::signal_cta_ready(dim3 ctaid)
+{
+    if(m_running_kernels.empty())
+        return false;
+    m_running_kernels[0]->signal_cta_ready(ctaid);
+    return true;
+}
+
 //void gpgpu_sim::cycle()
 //{
 //   int clock_mask = next_clock_domain();

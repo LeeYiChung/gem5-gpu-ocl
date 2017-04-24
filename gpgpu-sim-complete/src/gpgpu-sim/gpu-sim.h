@@ -423,7 +423,9 @@ public:
     * Returning the cluster of of the shader core, used by the functional simulation so far
     */
     simt_core_cluster * getSIMTCluster();
-
+    
+    /* Lalala */
+    bool signal_cta_ready(dim3 ctaid);
 
 private:
    // clocks

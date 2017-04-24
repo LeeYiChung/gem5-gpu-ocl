@@ -2536,6 +2536,26 @@ void clSetKernelArg(ThreadContext *tc, gpusyscall_t *call_params) {
   return ;
 }
 
+// Lalala
+void clSignalBlockReady(ThreadContext *tc, gpusyscall_t *call_params)
+{
+    GPUSyscallHelper helper(tc, call_params);
+    Addr block_index_addr = *((Addr*)helper.getParam(0, true));
+    size_t blockIdxArr[3];
+    helper.readBlob(block_index_addr, (uint8_t*)&blockIdxArr, 3 * sizeof(size_t));
+    
+    dim3 blockIdx;
+    blockIdx.x = blockIdxArr[0];
+    blockIdx.y = blockIdxArr[1];
+    blockIdx.z = blockIdxArr[2];
+
+    fprintf(stdout, "OPENCL SYSCALL: clSignalBlockReady(%u, %u, %u)\n", blockIdx.x, blockIdx.y, blockIdx.z);
+    fflush(stdout);
+    CudaGPU *cudaGPU = CudaGPU::getCudaGPU(g_active_device);
+    gpgpu_sim *gpu = cudaGPU->getTheGPU();
+    gpu->signal_cta_ready(blockIdx);
+}
+
 void clEnqueueNDRangeKernel(ThreadContext *tc, gpusyscall_t *call_params) {
     GPUSyscallHelper helper(tc, call_params);
     cl_command_queue command_queue = *((cl_command_queue*)helper.getParam(0));

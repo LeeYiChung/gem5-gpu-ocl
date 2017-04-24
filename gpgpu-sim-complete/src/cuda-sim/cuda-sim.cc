@@ -1749,6 +1749,11 @@ unsigned ptx_sim_init_thread( kernel_info_t &kernel,
       return 0; //finished!
    }
 
+   /* Lalala */
+   if ( kernel.no_ready_ctas_to_run() ) {
+      return 0;
+   }
+
    if ( threads_left < kernel.threads_per_cta() ) {
       return 0;
    }
