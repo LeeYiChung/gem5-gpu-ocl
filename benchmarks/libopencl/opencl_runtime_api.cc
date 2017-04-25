@@ -1465,8 +1465,8 @@ clEnqueueNDRangeKernel(cl_command_queue command_queue,
 extern CL_API_ENTRY cl_int CL_API_CALL
 clSignalBlockReady(const size_t* blockIdx) CL_API_SUFFIX__VERSION_1_0
 {
-    fprintf(stdout, "OPENCL RT API: clSignalBlockReady(%d, %d, %d)\n", blockIdx[0], blockIdx[1], blockIdx[2]);
-    fflush(stdout);
+    //fprintf(stdout, "OPENCL RT API: clSignalBlockReady(%d, %d, %d)\n", blockIdx[0], blockIdx[1], blockIdx[2]);
+    //fflush(stdout);
     
     gpusyscall_t call_params;
     call_params.num_args = 1;
