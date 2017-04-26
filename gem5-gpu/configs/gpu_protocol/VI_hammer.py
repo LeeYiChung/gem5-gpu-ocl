@@ -45,6 +45,10 @@ def define_options(parser):
           help="Hammer: enable Probe Filter")
     parser.add_option("--dir-on", action="store_true",
           help="Hammer: enable Full-bit Directory")
+    parser.add_option("--prefetcher", action="store_true",
+          help="Hammer: enable CPU prefetcher")
+    parser.add_option("--pref-dist", type="int", default=1,
+                      help = "prefetch distance")
 
 def create_system(options, full_system, system, dma_ports, ruby_system):
 
@@ -81,14 +85,18 @@ def create_system(options, full_system, system, dma_ports, ruby_system):
         l2_cache = L2Cache(size = options.l2_size,
                            assoc = options.l2_assoc,
                            start_index_bit = block_size_bits)
-
+        
+        prefetcher = SimplePrefetcher(pref_dist = options.pref_dist)
+        
         l1_cntrl = L1Cache_Controller(version = i,
                                       L1Icache = l1i_cache,
                                       L1Dcache = l1d_cache,
                                       L2cache = l2_cache,
+                                      prefetcher = prefetcher,
                                       no_mig_atomic = not \
                                         options.allow_atomic_migration,
                                       send_evictions = send_evicts(options),
+                                      enable_prefetch = options.prefetcher,
                                       transitions_per_cycle = options.ports,
                                       ruby_system = ruby_system)
 
@@ -126,6 +134,7 @@ def create_system(options, full_system, system, dma_ports, ruby_system):
 
         l1_cntrl.mandatoryQueue = MessageBuffer()
         l1_cntrl.triggerQueue = MessageBuffer()
+        l1_cntrl.optionalQueue = MessageBuffer()
 
     cpu_mem_range = AddrRange(options.total_mem_size)
     mem_module_size = cpu_mem_range.size() / options.num_dirs

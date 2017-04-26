@@ -474,3 +474,4 @@ Prefetcher::pageAddress(Addr addr) const
 {
     return maskLowOrderBits(addr, m_page_shift);
 }
+

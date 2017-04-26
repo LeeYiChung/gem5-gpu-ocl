@@ -48,3 +48,4 @@ class Prefetcher(SimObject):
     cross_page = Param.Bool(False, """True if prefetched address can be on a
             page different from the observed address""")
     sys = Param.System(Parent.any, "System this prefetcher belongs to")
+

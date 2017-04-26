@@ -208,10 +208,13 @@ def create_system(options, full_system, system, dma_devices, ruby_system):
                            start_index_bit = block_size_bits,
                            resourceStalls = False)
 
+    prefetcher = SimplePrefetcher()
+    
     l1_cntrl = L1Cache_Controller(version = options.num_cpus,
                                   L1Icache = pwi_cache,
                                   L1Dcache = pwd_cache,
                                   L2cache = l2_cache,
+                                  prefetcher = prefetcher,
                                   send_evictions = False,
                                   transitions_per_cycle = options.ports,
                                   issue_latency = l1_to_l2_noc_latency,
@@ -255,6 +258,7 @@ def create_system(options, full_system, system, dma_devices, ruby_system):
 
     l1_cntrl.mandatoryQueue = MessageBuffer()
     l1_cntrl.triggerQueue = MessageBuffer()
+    l1_cntrl.optionalQueue = MessageBuffer()
 
 
     #

@@ -82,7 +82,7 @@ class Type(Symbol):
 
         if self.ident == "Prefetcher":
             self["prefetcher"] = "yes"
-
+        
         self.isMachineType = (ident == "MachineType")
 
         self.isStateDecl = ("state_decl" in self)

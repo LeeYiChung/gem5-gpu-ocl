@@ -45,6 +45,7 @@ python_class_map = {
                     "MemoryControl": "MemoryControl",
                     "DMASequencer": "DMASequencer",
                     "Prefetcher":"Prefetcher",
+                    "SimplePrefetcher":"SimplePrefetcher",
                     "Cycles":"Cycles",
                    }
 
@@ -72,7 +73,10 @@ class StateMachine(Symbol):
 
             if str(param.type_ast.type) == "Prefetcher":
                 self.prefetchers.append(var)
-
+            
+            if str(param.type_ast.type) == "SimplePrefetcher":
+                self.prefetchers.append(var)
+            
         self.states = orderdict()
         self.events = orderdict()
         self.actions = orderdict()
