@@ -43,6 +43,7 @@ def define_options(parser):
           help="allow migratory sharing for atomic only accessed blocks")
     parser.add_option("--pf-on", action="store_true",
           help="Hammer: enable Probe Filter")
+    parser.add_option("--pf_assoc", type="int", default=8)
     parser.add_option("--dir-on", action="store_true",
           help="Hammer: enable Full-bit Directory")
     parser.add_option("--prefetcher", action="store_true",
@@ -171,7 +172,7 @@ def create_system(options, full_system, system, dma_ports, ruby_system):
         dir_size = MemorySize('0B')
         dir_size.value = mem_module_size
 
-        pf = ProbeFilter(size = pf_size, assoc = 4,
+        pf = ProbeFilter(size = pf_size, assoc = options.pf_assoc,
                          start_index_bit = pf_start_bit)
 
         dir_cntrl = Directory_Controller(version = i,

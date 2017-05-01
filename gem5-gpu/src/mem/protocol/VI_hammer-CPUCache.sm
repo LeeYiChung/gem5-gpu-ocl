@@ -176,6 +176,8 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
     bool AppliedSilentAcks, default="false", desc="for full-bit dir, does the pending msg count reflect the silent acks";
     MachineID LastResponder, desc="last machine to send a response for this request";
     MachineID CurOwner,      desc="current owner of the block, used for UnblockS responses";
+    // Lalala
+    bool isPrefetch, default="false", desc="Set if this block was prefetched";
 
     Cycles InitialRequestTime, default="Cycles(0)",
             desc="time the initial requests was sent from the L1Cache";
@@ -350,7 +352,6 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
     in_port(optionalQueue_in, RubyRequest, optionalQueue, desc="...", rank = 4) {
         if (optionalQueue_in.isReady()) {
             peek(optionalQueue_in, RubyRequest) {
-                TBE tbe := TBEs[in_msg.LineAddress];
                 Entry L1Dcache_entry := getL1DCacheEntry(in_msg.LineAddress);
                 if (is_valid(L1Dcache_entry)) {
                     // The tag matches for the L1, so the prefetch is late
@@ -365,30 +366,22 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
                         optionalQueue_in.dequeue();
                     }
                     else {
-                        if (L1Dcache.cacheAvail(in_msg.LineAddress)) {
-                            // L1 does't have the line, but we have space for it in the L1
-                            Entry L2cache_entry := getL2CacheEntry(in_msg.LineAddress);
-                            if (is_valid(L2cache_entry)) {
-                                // The tag matches for the L2, so the prefetch is late
-                                ++prefetcher.num_prefetch_late;
-                                optionalQueue_in.dequeue();
-                            } 
-                            else {
-                                // We have room, the L2 doesn't have it, so the L1 fetches the line
-                                ++prefetcher.num_prefetch_issued;
-                                trigger(Event:PF_Load, in_msg.LineAddress, L1Dcache_entry, tbe);
-                            }
+                        // Check to see if it is in the L2Cache
+                        Entry L2cache_entry := getL2CacheEntry(in_msg.LineAddress);
+                        if (is_valid(L2cache_entry)) {
+                            // The tag matches for the L2, so the prefetch is late
+                            ++prefetcher.num_prefetch_late;
+                            optionalQueue_in.dequeue();
                         } 
                         else {
-                            // No room in the L1, so we need to make room
-                            Addr l1d_victim_addr := L1Dcache.cacheProbe(in_msg.LineAddress);
-                            if (L2cache.cacheAvail(l1d_victim_addr)) {
-                                // The L2 has room, so we move the line from the L1 to the L2
-                                trigger(Event:L1_to_L2, l1d_victim_addr,
-                                    getL1DCacheEntry(l1d_victim_addr), TBEs[l1d_victim_addr]);
+                            if (L2cache.cacheAvail(in_msg.LineAddress)) {
+                                // The L2 has room, so we prefetch data to L2
+                                ++prefetcher.num_prefetch_issued;
+                                trigger(Event:PF_Load, in_msg.LineAddress,
+                                    getL2CacheEntry(in_msg.LineAddress), TBEs[in_msg.LineAddress]);
                             } 
                             else {
-                                Addr l2_victim_addr := L2cache.cacheProbe(l1d_victim_addr);
+                                Addr l2_victim_addr := L2cache.cacheProbe(in_msg.LineAddress);
                                 // The L2 does not have room, so we replace a line from the L2
                                 trigger(Event:L2_Replacement, l2_victim_addr,
                                     getL2CacheEntry(l2_victim_addr), TBEs[l2_victim_addr]);
@@ -974,6 +967,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
     // Lalala
     if(cache_entry.isPrefetch == true) {
         ++prefetcher.num_prefetch_hit;
+        prefetcher.observePfHit(address);
         cache_entry.isPrefetch := false;
     }
     sequencer.readCallback(address, cache_entry.DataBlk, false,
@@ -997,6 +991,12 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
     assert(is_valid(cache_entry));
     DPRINTF(RubySlicc, "%s\n", cache_entry.DataBlk);
     peek(mandatoryQueue_in, RubyRequest) {
+      // Lalala
+      if(cache_entry.isPrefetch == true) {
+        ++prefetcher.num_prefetch_hit;
+        cache_entry.isPrefetch := false;
+      }
+
       sequencer.writeCallback(address, cache_entry.DataBlk, false,
                               testAndClearLocalHit(cache_entry));
 
@@ -1047,6 +1047,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
     tbe.DataBlk := cache_entry.DataBlk; // Data only used for writebacks
     tbe.Dirty := cache_entry.Dirty;
     tbe.Sharers := false;
+    tbe.isPrefetch := cache_entry.isPrefetch;
   }
 
   action(it_allocateTBE, "it", desc="Allocate TBE") {
@@ -1087,6 +1088,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
     cache_entry.Dirty   := tbe.Dirty;
     cache_entry.DataBlk := tbe.DataBlk;
     cache_entry.FromL2 := true;
+    cache_entry.isPrefetch := tbe.isPrefetch;
   }
 
   action(m_decrementNumberOfMessages, "m", desc="Decrement the number of messages for which we're waiting") {
@@ -1457,6 +1459,10 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
   transition({IR, SR, OR, MR, MMR}, {Other_GETX, NC_DMA_GETS, Other_GETS, Merged_GETS, Other_GETS_No_Mig, Invalidate}) {
     z_stall;
   }
+  
+  transition({IS, M_W}, {Trigger_L2_to_L1D, Trigger_L2_to_L1I}) {
+    z_stall;
+  }
 
   // Transitions moving data between the L1 and L2 caches
   transition({I, S, O, M, MM}, L1_to_L2) {
@@ -1469,6 +1475,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(I, Trigger_L2_to_L1D, IT) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     ii_allocateL1DCacheBlock;
     nb_copyFromTBEToL1; // Not really needed for state I
@@ -1479,6 +1486,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(S, Trigger_L2_to_L1D, ST) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     ii_allocateL1DCacheBlock;
     nb_copyFromTBEToL1;
@@ -1489,6 +1497,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(O, Trigger_L2_to_L1D, OT) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     ii_allocateL1DCacheBlock;
     nb_copyFromTBEToL1;
@@ -1499,6 +1508,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(M, Trigger_L2_to_L1D, MT) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     ii_allocateL1DCacheBlock;
     nb_copyFromTBEToL1;
@@ -1509,6 +1519,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(MM, Trigger_L2_to_L1D, MMT) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     ii_allocateL1DCacheBlock;
     nb_copyFromTBEToL1;
@@ -1519,6 +1530,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(I, Trigger_L2_to_L1I, IT) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     jj_allocateL1ICacheBlock;
     nb_copyFromTBEToL1;
@@ -1529,6 +1541,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(S, Trigger_L2_to_L1I, ST) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     jj_allocateL1ICacheBlock;
     nb_copyFromTBEToL1;
@@ -1539,6 +1552,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(O, Trigger_L2_to_L1I, OT) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     jj_allocateL1ICacheBlock;
     nb_copyFromTBEToL1;
@@ -1549,6 +1563,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(M, Trigger_L2_to_L1I, MT) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     jj_allocateL1ICacheBlock;
     nb_copyFromTBEToL1;
@@ -1559,6 +1574,7 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
 
   transition(MM, Trigger_L2_to_L1I, MMT) {
     i_allocateTBE;
+    cp_clearPrefetchBit; // Lalala
     rr_deallocateL2CacheBlock;
     jj_allocateL1ICacheBlock;
     nb_copyFromTBEToL1;
@@ -1607,7 +1623,8 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
   // Lalala
   // Transitions from Idle
   transition({I,IR}, PF_Load , IS) {
-    ii_allocateL1DCacheBlock;
+    //ii_allocateL1DCacheBlock;
+    vv_allocateL2CacheBlock;
     mp_markPrefetchedIfNecessary;
     i_allocateTBE;
     a_issueGETS;
@@ -1631,6 +1648,8 @@ machine({L1Cache, L2Cache}, "AMD Hammer-like protocol")
     b_issueGETX;
     uu_profileL1DataMiss;
     uu_profileL2Miss;
+    // Lalala
+    po_observeMiss;
     k_popMandatoryQueue;
   }
 

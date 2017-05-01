@@ -22,9 +22,12 @@ void
 SimplePrefetcher::observeMiss(Addr address, const RubyRequestType& type) {
     
     Addr line_addr = makeLineAddress(address);
-    DPRINTF(SimplePrefetcher, "Observed miss for %s, %s\n", address, line_addr);
-    Addr next_line_addr = makeNextStrideAddress(line_addr, m_pref_dist);
-    m_controller->enqueuePrefetch(next_line_addr, RubyRequestType_LD);
+    DPRINTF(SimplePrefetcher, "Observed miss for %s\n", line_addr);
+    if(m_pref_dist != 0) {
+        Addr next_line_addr = makeNextStrideAddress(line_addr, m_pref_dist);
+        DPRINTF(SimplePrefetcher, "Prefetch  for %s\n", next_line_addr);
+        m_controller->enqueuePrefetch(next_line_addr, RubyRequestType_LD);
+    }
 }
 
 void
