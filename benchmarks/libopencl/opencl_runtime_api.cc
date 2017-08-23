@@ -1237,7 +1237,8 @@ clBuildProgram(cl_program           program,
     delete call_params.ret;
 
     if (allocation_size < 0) {
-        printf("gem5 + GPGPU-Sim CUDA RT: Problem with const allocation... Exiting\n");
+        printf("gem5 + GPGPU-Sim OPENCL RT: Problem with const allocation... Exiting\n");
+        printf("error code %d\n", allocation_size);
         exit(-1);
     }
 
@@ -1492,6 +1493,29 @@ clSignalBlockReady(const size_t* blockIdx) CL_API_SUFFIX__VERSION_1_0
     delete call_params.ret;
 
     return ret;
+}
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clReadReadyBlockCounter(void) CL_API_SUFFIX__VERSION_1_0
+{
+    gpusyscall_t call_params;
+    call_params.num_args = 0;
+    //call_params.arg_lengths = new int[call_params.num_args];
+    call_params.total_bytes = 0;
+    //call_params.args = new char[call_params.total_bytes];
+    call_params.ret = new char[sizeof(cl_int)];
+
+    //int* ret_spot = (int*)call_params.ret;
+    //*ret_spot = 0;
+
+    m5_gpu(117, (uint64_t)&call_params);
+    cl_int readyBlockCounter = *((cl_int*)call_params.ret);
+
+    //delete call_params.args;
+    //delete call_params.arg_lengths;
+    delete call_params.ret;
+
+    return readyBlockCounter;
 }
 
 extern CL_API_ENTRY cl_int CL_API_CALL

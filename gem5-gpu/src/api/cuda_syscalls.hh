@@ -291,6 +291,7 @@ void clWaitForEvents(ThreadContext *tc, gpusyscall_t *call_params);
 void clCreateContextFromType(ThreadContext *tc, gpusyscall_t *call_params);
 // Lalala
 void clSignalBlockReady(ThreadContext *tc, gpusyscall_t *call_params);
+void clReadReadyBlockCounter(ThreadContext *tc, gpusyscall_t *call_params);
 
 #if (CUDART_VERSION >= 2010)
 
@@ -438,7 +439,8 @@ cudaFunc_t gpgpu_funcs[] = {
         clWaitForEvents,		/* 114 OpenCL 29 */
         clCreateContextFromType, /* 115 OpenCL 30 */
         // Lalala
-        clSignalBlockReady /* 116 OpenCL 30 */
+        clSignalBlockReady, /* 116 OpenCL 31 */
+        clReadReadyBlockCounter /* 117 OpenCL 32 */
 };
 
 #endif

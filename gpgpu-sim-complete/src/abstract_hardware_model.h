@@ -258,6 +258,12 @@ public:
         m_ready_ctas.push_back(ctaid);
     }
 
+    /* Lalala */
+    size_t num_ready_blocks() const
+    {
+        return m_ready_ctas.size();
+    }
+
 	void increment_thread_id()
 	{
 		if (m_use_last_cta)

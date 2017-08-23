@@ -1358,6 +1358,14 @@ gpgpu_sim::signal_cta_ready(dim3 ctaid)
     return true;
 }
 
+int
+gpgpu_sim::read_ready_cta_counter(void)
+{
+    if(m_running_kernels.empty())
+        return -1;
+    return m_running_kernels[0]->num_ready_blocks();
+}
+
 //void gpgpu_sim::cycle()
 //{
 //   int clock_mask = next_clock_domain();

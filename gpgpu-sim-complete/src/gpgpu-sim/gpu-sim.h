@@ -426,6 +426,7 @@ public:
     
     /* Lalala */
     bool signal_cta_ready(dim3 ctaid);
+    int read_ready_cta_counter(void);
 
 private:
    // clocks

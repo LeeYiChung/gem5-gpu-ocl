@@ -618,6 +618,7 @@ switchcpu(ThreadContext *tc)
 // what the user specified at the command line, the simulation may exit and/or
 // take a checkpoint when a certain work item begins.
 //
+uint64_t g_timer;
 void
 workbegin(ThreadContext *tc, uint64_t workid, uint64_t threadid)
 {
@@ -629,6 +630,9 @@ workbegin(ThreadContext *tc, uint64_t workid, uint64_t threadid)
 
     DPRINTF(WorkItems, "Work Begin workid: %d, threadid %d\n", workid, 
             threadid);
+    
+    // Lalala
+    g_timer = curTick();
 
     //
     // If specified, determine if this is the specific work item the user
@@ -687,6 +691,9 @@ workend(ThreadContext *tc, uint64_t workid, uint64_t threadid)
 
     DPRINTF(WorkItems, "Work End workid: %d, threadid %d\n", workid, threadid);
 
+    // Lalala
+    printf("Run-time: %lu ticks\n", curTick() - g_timer);
+    
     //
     // If specified, determine if this is the specific work item the user
     // identified
@@ -727,7 +734,7 @@ void
 gpu(ThreadContext *tc, uint64_t gpusysno, uint64_t call_params)
 {
 // total syscall number
-    if (gpusysno > 116) {
+    if (gpusysno > 117) {
         warn("Ignoring gpu syscall %d\n", gpusysno);
         return;
     }
