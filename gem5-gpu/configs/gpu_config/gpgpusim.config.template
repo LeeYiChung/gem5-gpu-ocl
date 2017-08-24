@@ -123,9 +123,11 @@
 
 # stat collection
 -gpgpu_memlatency_stat 14
--gpgpu_runtime_stat 50000
+#-gpgpu_runtime_stat 50000
+-gpgpu_runtime_stat 3000
 -enable_ptx_file_line_stats 0
--visualizer_enabled 0
+-visualizer_enabled 1
+-visualizer_outputfile Lalala
 
 # power model configs
 #-power_simulation_enabled 1

@@ -32,6 +32,9 @@
 #include "debug/ShaderLSQ.hh"
 #include "gpu/shader_lsq.hh"
 
+extern long int visual_update_warpLatency;
+extern long int visual_update_warpAccess;
+
 using namespace std;
 
 ShaderLSQ::ShaderLSQ(Params *p)
@@ -681,6 +684,8 @@ ShaderLSQ::commitWarpInst()
     }
     if (warp_inst->isLoad()) {
         warpLatencyRead.sample(ticksToCycles(warp_inst->getLatency()));
+        visual_update_warpLatency += ticksToCycles(warp_inst->getLatency());
+        visual_update_warpAccess++;
     } else if (warp_inst->isStore()) {
         warpLatencyWrite.sample(ticksToCycles(warp_inst->getLatency()));
     } else if (warp_inst->isFence()) {

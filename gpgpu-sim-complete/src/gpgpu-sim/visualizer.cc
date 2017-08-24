@@ -41,6 +41,11 @@
 #include <string.h>
 #include <zlib.h>
 
+long int visual_warpLatency = 0;
+long int visual_update_warpLatency = 0;
+long int visual_update_warpAccess = 0;
+long int visual_counter = 0;
+
 static void time_vector_print_interval2gzfile(gzFile outfile);
 
 void gpgpu_sim::visualizer_printstat()
@@ -73,7 +78,18 @@ void gpgpu_sim::visualizer_printstat()
    gzprintf(visualizer_file, "globalcyclecount: %lld\n", gpu_sim_cycle);
    gzprintf(visualizer_file, "globalinsncount: %lld\n", gpu_sim_insn);
    gzprintf(visualizer_file, "globaltotinsncount: %lld\n", gpu_tot_sim_insn);
-
+      
+   gzprintf(visualizer_file, "warplatency: %lld\n", visual_warpLatency);
+   if(visual_counter == 0) {
+      if(visual_update_warpAccess != 0)
+         visual_warpLatency = visual_update_warpLatency / visual_update_warpAccess;
+      else
+         visual_warpLatency = 0;
+      visual_update_warpLatency = 0;
+      visual_update_warpAccess = 0;
+   }
+   visual_counter = (visual_counter + 1) % 5;
+   
    time_vector_print_interval2gzfile(visualizer_file);
 
    gzclose(visualizer_file);
