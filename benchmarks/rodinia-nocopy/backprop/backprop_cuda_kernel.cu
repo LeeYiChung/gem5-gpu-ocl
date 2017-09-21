@@ -53,22 +53,6 @@ bpnn_layerforward_CUDA(float *input_cuda,
 
    }
 
-   //__syncthreads();
-
-   //input_hidden_cuda[index] = weight_matrix[ty][tx];
-
-/*
-   for ( unsigned int i = 2 ; i <= HEIGHT ; i *= 2){
-
-	   unsigned int power_two = i - 1;
-
-	   if( (ty & power_two) == 0 ) {
-		weight_matrix[ty][tx] = weight_matrix[ty][tx] + weight_matrix[ty + power_two/2][tx];
-	   }
-
-   }
-   */
-
    __syncthreads();
 
    if ( tx == 0 ) {
