@@ -19,7 +19,7 @@ extern int hCols;
 void gaborFilter(cv::Mat& srcImage, cv::Mat& dstImage, int radius, double sigma, double theta, double lambd, double gamma, double psi) {
 
     clutInit();
-    cl_program program = clutCompileProgram("GaborFilterKernel.cu");
+    cl_program program = clutCompileProgram("_0.ptx");
     cl_kernel kernel = clutCreateKernel(program, "_Z17gaborFilterKernelPfS_iiS_i");
 #ifdef GEM5_FUSION
     m5_work_begin(0, 0);

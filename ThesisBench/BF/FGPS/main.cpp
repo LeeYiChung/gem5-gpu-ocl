@@ -18,7 +18,7 @@ extern int hCols;
 void bilateralFilter(cv::Mat& srcImage, cv::Mat& dstImage, int radius=0, float sigmaColor=0, float sigmaSpace=0) {
     
     clutInit();
-    cl_program program = clutCompileProgram("BilateralFilterKernel.cu");
+    cl_program program = clutCompileProgram("_0.ptx");
     cl_kernel kernel = clutCreateKernel(program, "_Z21bilateralFilterKernelPfS_iiiff");
 
     float gauss_color_coeff = -0.5 / (sigmaColor * sigmaColor);    

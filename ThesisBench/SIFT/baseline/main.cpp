@@ -35,7 +35,7 @@ void buildDoGPyramid(float* dogpyr, cv::Mat& image, int nOctaveLayers, double si
 void localmax(int* flags, float* dogpyr, int rows, int cols, float contrastThreshold, float curvateThreshold)
 {
     m5_work_begin(0, 0);
-    cl_program program = clutCompileProgram("KeypointLocalization.cl");
+    cl_program program = clutCompileProgram("_0.ptx");
     cl_kernel kernel = clutCreateKernel(program, "_Z20KeypointLocalizationPiPfiiff");
  
     size_t globalWorkSize[3] = {cols, rows, 4};

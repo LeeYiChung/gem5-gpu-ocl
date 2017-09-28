@@ -3300,7 +3300,6 @@ unsigned simt_core_cluster::issue_block2core()
         }
         kernel_info_t *kernel = m_core[core]->get_kernel();
         /* Lalala */
-        //if( kernel && !kernel->no_more_ctas_to_run() && (m_core[core]->get_n_active_cta() < m_config->max_cta(*kernel)) ) {
         if( kernel && !kernel->no_more_ctas_to_run() && !kernel->no_ready_ctas_to_run() && (m_core[core]->get_n_active_cta() < m_config->max_cta(*kernel)) ) {
             m_core[core]->issue_block2core(*kernel);
             num_blocks_issued++;

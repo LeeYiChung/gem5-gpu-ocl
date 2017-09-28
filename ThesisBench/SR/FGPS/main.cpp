@@ -30,7 +30,7 @@ int sat(float value) {
 void superResolution(cv::Mat& srcImage, cv::Mat& dstImage) {
     
     clutInit();
-    cl_program program = clutCompileProgram("SuperResolutionKernel.cu");
+    cl_program program = clutCompileProgram("_0.ptx");
     cl_kernel kernel = clutCreateKernel(program, "_Z21superResolutionKernelPfS_ii");
     
 #ifdef GEM5_FUSION

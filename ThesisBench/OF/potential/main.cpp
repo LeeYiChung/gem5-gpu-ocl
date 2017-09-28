@@ -19,7 +19,7 @@ extern int hCols;
 void opticalFlow(cv::Mat& srcImage1, cv::Mat& srcImage2, cv::Size window, int iteration) {
     
     clutInit();
-    cl_program program = clutCompileProgram("OpticalFlowKernel.cu");
+    cl_program program = clutCompileProgram("_0.ptx");
     cl_kernel kernel = clutCreateKernel(program, "_Z17opticalFlowKernelPiS_S_S_iiiii");
 
 #ifdef GEM5_FUSION
